@@ -23,7 +23,7 @@ export default function Csr() {
           setError('Eroare la încărcarea istoricului.');
         }
       } catch (err) {
-        setError('Eroare la conectarea cu serverul.');
+        setError('Eroare la conectarea cu serverul MongoDB.');
       }
     };
 
@@ -94,7 +94,7 @@ export default function Csr() {
       }
 
     } catch (err) {
-      setError('Eroare la conectarea cu serverul 2.');
+      setError('Eroare la conectarea cu serverul HandleCheck.');
     }
   };
 
