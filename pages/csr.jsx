@@ -48,9 +48,8 @@ export default function Csr() {
       setError('');
 
       // Obține informațiile de locație ale IP-ului
-      const geoResponse = await fetch(`https://ip-api.com/json/${ip}?fields=lat,lon,city,country`);
+      const geoResponse = await fetch(`http://ip-api.com/json/${ip}?fields=lat,lon,city,country`);
       const geoResult = await geoResponse.json();
-
       if (geoResult.status === 'fail') {
         setError('Nu s-au putut obține coordonatele IP-ului.');
         return;
