@@ -1,40 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Proiect Cloud Computing 2025 - Verificator IP - Detecție activități suspecte
 
-## Getting Started
+**Nume:** Burciu Andreea-Claudia
+**Grupa:** 1132
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Link video prezentare:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Link aplicație publicată:
+https://proiect-cc-sigma.vercel.app/
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+---
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## 1. Introducere
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Acest proiect constă într-o aplicație web care permite verificarea unei adrese IP pentru a vedea dacă a fost raportată pentru activități suspecte. Am realizat aplicația folosind Next.js (React + API routes), iar datele sunt afișate în mod interactiv cu componente precum Leaflet pentru hartă și Recharts pentru grafic. Informațiile despre IP sunt obținute în timp real folosind două API-uri externe, iar istoricul căutărilor este salvat într-o bază de date MongoDB Atlas, pentru a putea fi vizualizat ulterior.
 
-## Learn More
+Am folosit următoarele servicii cloud:
+MongoDB Atlas – pentru salvarea și gestionarea căutărilor în cloud;
+Vercel – pentru deploy și hosting automat al aplicației.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+## 2. Descriere problemă
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+IP-urile pot fi implicate în activități rău intenționate (spam, hacking, botnets etc.), iar identificarea acestora e importantă în contextul securității cibernetice. De cele mai multe ori, este util să știm dacă un IP este de încredere sau a fost deja raportat. Astfel, am creeat o soluție care permite utilizatorului să introducă o adresă IP și să afle imediat dacă aceasta a fost raportată, în ce țară se află și ce ISP o deține. În plus, am adăugat un sistem de salvare automată a căutărilor într-o bază de date (MongoDB Atlas), pentru a putea fi analizate ulterior vizual printr-un grafic de tip bar chart.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 3. Descriere API
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+a) API-uri externe folosite
+
+1. AbuseIPDB
+Link: https://www.abuseipdb.com
+Este un serviciu care returnează un „abuseConfidenceScore” și numărul de raportări pentru o adresă IP.
+Pentru a putea folosi acest API, mi-am creat un cont și am generat o cheie API personală, care a fost salvată în fișierul .env.local pentru a nu fi expusă publicului.
+
+Exemplu request către AbuseIPDB:
+
+GET https://api.abuseipdb.com/api/v2/check?ipAddress=8.8.8.8&maxAgeInDays=90
+Headers:
+  Key: Key_API_OBTINUTA
+  Accept: application/json
+
+3. ipwho.is
+Link: https://ipwho.is
+API gratuit, fără autentificare, folosit pentru a obține locația geografică a unui IP (țară, oraș, latitudine, longitudine).
+
+b) API intern propriu (Next.js)
+
+Am creat un endpoint intern /api/searches, care gestionează salvarea și citirea istoricului:
+GET /api/searches – întoarce toate IP-urile salvate în MongoDB;
+POST /api/searches – salvează o nouă căutare în baza de date (dacă IP-ul nu a mai fost salvat deja).
+
+---
+
+## 4. Flux de date
+
+a) Utilizatorul introduce o adresă IP.
+b) Se face o cerere către AbuseIPDB pentru scorul de abuz.
+c) Se face o altă cerere către ipwho.is pentru locație (oraș, țară, coordonate).
+d) Datele sunt afișate în aplicație:
+   Detalii IP
+   Hartă cu locația
+   Grafic cu scorurile din istoric
+e) Se salvează căutarea în MongoDB printr-un POST către /api/searches.
+f) Se preiau toate căutările salvate și sunt afișate într-un grafic Recharts.
+
+Exemplu request POST:
+{
+  "ipAddress": "8.8.8.8",
+  "country": "United States",
+  "city": "Mountain View",
+  "abuseConfidenceScore": 0,
+  "totalReports": 0,
+  "isp": "Google LLC",
+  "latitude": 37.4223,
+  "longitude": -122.085,
+  "timestamp": "2025-05-20T10:00:00Z"
+}
+
+---
+
+  ## 5. Capturi ecran aplicație
+  
+![image](https://github.com/user-attachments/assets/bfbf47da-9043-40a9-9174-b0ead4143fdb)
+![image](https://github.com/user-attachments/assets/d10ca362-9df7-4c09-8ed0-87533f5f6a39)
+![image](https://github.com/user-attachments/assets/f9c235d9-5960-4b3b-a892-65c618b0bddc)
+![image](https://github.com/user-attachments/assets/f02a4ce5-98b1-4978-b46b-289e27cb9e41)
+
+---
+
+  ## 6. Referințe
+  
+Next.js 
+AbuseIPDB
+ipwho.is 
+MongoDB Atlas
+Recharts
+Leaflet Map
+Vercel
+
