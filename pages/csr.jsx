@@ -39,7 +39,7 @@ export default function Csr() {
       const result = await response.json();
 
       if (!response.ok) {
-        setError('IP invalid sau eroare de la server.');
+        setError('IP invalid sau eroare de la server 2.');
         setData(null);
         return;
       }
