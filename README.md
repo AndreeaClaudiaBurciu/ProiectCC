@@ -39,7 +39,9 @@ Este un serviciu care returnează un „abuseConfidenceScore” și numărul de 
 Pentru a putea folosi acest API, mi-am creat un cont și am generat o cheie API personală, care a fost salvată în fișierul .env.local pentru a nu fi expusă publicului.
 
 Exemplu request către AbuseIPDB:
+---
 ![image](https://github.com/user-attachments/assets/62b61c9d-a4ff-4a35-82a3-7c29b5f93de6)
+---
 
 2. ipwho.is
 Link: https://ipwho.is
@@ -66,7 +68,9 @@ e) Se salvează căutarea în MongoDB printr-un POST către /api/searches.
 f) Se preiau toate căutările salvate și sunt afișate într-un grafic Recharts.
 
 Exemplu request POST:
+---
 ![image](https://github.com/user-attachments/assets/a532d10b-9724-4ad9-a0a6-a225d1f08af4)
+---
 
 ---
 
