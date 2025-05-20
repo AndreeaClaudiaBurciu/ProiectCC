@@ -48,8 +48,8 @@ API gratuit, fără autentificare, folosit pentru a obține locația geografică
 b) API intern propriu (Next.js)
 
 Am creat un endpoint intern /api/searches, care gestionează salvarea și citirea istoricului:
-GET /api/searches – întoarce toate IP-urile salvate în MongoDB - Răspuns: 200 OK + JSON
-POST /api/searches – salvează o nouă căutare în baza de date (dacă IP-ul nu a mai fost salvat deja) - Răspuns: 201 Created sau 409 Conflict
+- **GET /api/searches – întoarce toate IP-urile salvate în MongoDB - Răspuns: 200 OK + JSON**
+- **POST /api/searches – salvează o nouă căutare în baza de date (dacă IP-ul nu a mai fost salvat deja) - Răspuns: 201 Created sau 409 Conflict**
 
 ---
 
@@ -59,9 +59,9 @@ a) Utilizatorul introduce o adresă IP.
 b) Se face o cerere către AbuseIPDB pentru scorul de abuz.
 c) Se face o altă cerere către ipwho.is pentru locație (oraș, țară, coordonate).
 d) Datele sunt afișate în aplicație:
-   Detalii IP
-   Hartă cu locația
-   Grafic cu scorurile din istoric
+   - **Detalii IP**
+   - **Hartă cu locația**
+   - **Grafic cu scorurile din istoric**
 e) Se salvează căutarea în MongoDB printr-un POST către /api/searches.
 f) Se preiau toate căutările salvate și sunt afișate într-un grafic Recharts.
 
@@ -80,12 +80,15 @@ Exemplu request POST:
 ---
 
   ## 6. Referințe
-  
-Next.js 
-AbuseIPDB
-ipwho.is 
-MongoDB Atlas
-Recharts
-Leaflet Map
-Vercel
+
+- **Next.js** – framework pentru React cu API routes
+- **MongoDB Atlas** – bază de date cloud pentru salvarea istoricului
+- **Vercel** – platformă de hosting și deploy automat
+- **Leaflet** – afișarea locației IP-ului pe hartă
+- **Recharts** – grafic pentru afișarea scorurilor IP-urilor verificate
+- **AbuseIPDB** – API
+- **ipwho.is ** – API
+
+
+
 
