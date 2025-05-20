@@ -57,10 +57,11 @@ export default function Csr() {
 
       const fullData = {
         ...result.data,
-        latitude: geoResult.lat,
-        longitude: geoResult.lon,
+        latitude: geoResult.latitude,
+        longitude: geoResult.longitude,
         city: geoResult.city,
         country: geoResult.country,
+        isp: geoResult.connection?.isp || 'necunoscut',
       };
 
       setData(fullData);
