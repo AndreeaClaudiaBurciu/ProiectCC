@@ -61,9 +61,9 @@ a) Utilizatorul introduce o adresă IP.
 b) Se face o cerere către AbuseIPDB pentru scorul de abuz.
 c) Se face o altă cerere către ipwho.is pentru locație (oraș, țară, coordonate).
 d) Datele sunt afișate în aplicație:
-   - **Detalii IP**
-   - **Hartă cu locația**
-   - **Grafic cu scorurile din istoric**
+   - Detalii IP
+   - Hartă cu locația
+   - Grafic cu scorurile din istoric
 e) Se salvează căutarea în MongoDB printr-un POST către /api/searches.
 f) Se preiau toate căutările salvate și sunt afișate într-un grafic Recharts.
 
