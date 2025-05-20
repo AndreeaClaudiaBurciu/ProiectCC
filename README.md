@@ -39,21 +39,17 @@ Este un serviciu care returnează un „abuseConfidenceScore” și numărul de 
 Pentru a putea folosi acest API, mi-am creat un cont și am generat o cheie API personală, care a fost salvată în fișierul .env.local pentru a nu fi expusă publicului.
 
 Exemplu request către AbuseIPDB:
+![image](https://github.com/user-attachments/assets/62b61c9d-a4ff-4a35-82a3-7c29b5f93de6)
 
-GET https://api.abuseipdb.com/api/v2/check?ipAddress=8.8.8.8&maxAgeInDays=90
-Headers:
-  Key: Key_API_OBTINUTA
-  Accept: application/json
-
-3. ipwho.is
+2. ipwho.is
 Link: https://ipwho.is
 API gratuit, fără autentificare, folosit pentru a obține locația geografică a unui IP (țară, oraș, latitudine, longitudine).
 
 b) API intern propriu (Next.js)
 
 Am creat un endpoint intern /api/searches, care gestionează salvarea și citirea istoricului:
-GET /api/searches – întoarce toate IP-urile salvate în MongoDB;
-POST /api/searches – salvează o nouă căutare în baza de date (dacă IP-ul nu a mai fost salvat deja).
+GET /api/searches – întoarce toate IP-urile salvate în MongoDB - Răspuns: 200 OK + JSON
+POST /api/searches – salvează o nouă căutare în baza de date (dacă IP-ul nu a mai fost salvat deja) - Răspuns: 201 Created sau 409 Conflict
 
 ---
 
@@ -70,17 +66,7 @@ e) Se salvează căutarea în MongoDB printr-un POST către /api/searches.
 f) Se preiau toate căutările salvate și sunt afișate într-un grafic Recharts.
 
 Exemplu request POST:
-{
-  "ipAddress": "8.8.8.8",
-  "country": "United States",
-  "city": "Mountain View",
-  "abuseConfidenceScore": 0,
-  "totalReports": 0,
-  "isp": "Google LLC",
-  "latitude": 37.4223,
-  "longitude": -122.085,
-  "timestamp": "2025-05-20T10:00:00Z"
-}
+![image](https://github.com/user-attachments/assets/a532d10b-9724-4ad9-a0a6-a225d1f08af4)
 
 ---
 
