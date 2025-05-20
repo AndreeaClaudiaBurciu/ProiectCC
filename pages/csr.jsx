@@ -39,7 +39,7 @@ export default function Csr() {
       const result = await response.json();
 
       if (!response.ok) {
-        setError('IP invalid sau eroare de la server 2.');
+        setError('IP invalid sau eroare de la server.');
         setData(null);
         return;
       }
@@ -94,7 +94,7 @@ export default function Csr() {
       }
 
     } catch (err) {
-      setError('Eroare la conectarea cu serverul.');
+      setError('Eroare la conectarea cu serverul 2.');
     }
   };
 
