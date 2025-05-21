@@ -15,17 +15,21 @@ https://proiect-cc-sigma.vercel.app/
 
 ## 1. Introducere
 
-Acest proiect constă într-o aplicație web care permite verificarea unei adrese IP pentru a vedea dacă a fost raportată pentru activități suspecte. Am realizat aplicația folosind Next.js (React + API routes), iar datele sunt afișate în mod interactiv cu componente precum Leaflet pentru hartă și Recharts pentru grafic. Informațiile despre IP sunt obținute în timp real folosind două API-uri externe, iar istoricul căutărilor este salvat într-o bază de date MongoDB Atlas, pentru a putea fi vizualizat ulterior.
-
-Am folosit următoarele servicii cloud:
-MongoDB Atlas – pentru salvarea și gestionarea căutărilor în cloud;
-Vercel – pentru deploy și hosting automat al aplicației.
+Aplicația realizată în cadrul acestui proiect are ca scop verificarea unei adrese IP din perspectiva securității cibernetice. Mai exact, proiectul constă într-o aplicație web interactivă care permite utilizatorilor să verifice dacă o adresă IP a fost implicată în activități suspecte, precum spam, atacuri cibernetice sau alte acțiuni malițioase. Proiectul a fost dezvoltat folosind Next.js, un framework pentru React care permite construirea de aplicații full-stack, inclusiv rutare API pe server-side.
+	Datele sunt obținute în timp real prin interogarea a două API-uri externe: AbuseIPDB, pentru reputația IP-ului, și ipwho.is, pentru informații de geolocalizare. Ulterior, aceste date sunt procesate și afișate în interfață. De asemenea, fiecare căutare efectuată este salvată într-o bază de date MongoDB Atlas, permițând astfel agregarea rezultatelor și afișarea unui istoric în format grafic.
+	Aplicația este publicată și găzduită în cloud prin intermediul platformei Vercel, care gestionează automat procesul de build și deploy continuu.
+	Tehnologii utilizate:
+-	Next.js – pentru aplicația web și gestionarea rutelor API
+-	MongoDB Atlas – pentru persistarea și gestionarea datelor în cloud
+-	Vercel – pentru deploy și hosting
+-	Leaflet.js – pentru afișarea poziției IP-ului pe hartă
+-	Recharts – pentru reprezentarea vizuală a istoricului căutărilor
 
 ---
 
 ## 2. Descriere problemă
 
-IP-urile pot fi implicate în activități rău intenționate (spam, hacking, botnets etc.), iar identificarea acestora e importantă în contextul securității cibernetice. De cele mai multe ori, este util să știm dacă un IP este de încredere sau a fost deja raportat. Astfel, am creeat o soluție care permite utilizatorului să introducă o adresă IP și să afle imediat dacă aceasta a fost raportată, în ce țară se află și ce ISP o deține. În plus, am adăugat un sistem de salvare automată a căutărilor într-o bază de date (MongoDB Atlas), pentru a putea fi analizate ulterior vizual printr-un grafic de tip bar chart.
+Adresele IP pot deveni surse de activitate dăunătoare în rețea, fiind utilizate pentru spam, atacuri informatice, tentative de phishing sau ca parte a rețelelor botnet. În contextul actual al securității informatice, identificarea rapidă a unei surse potențial malițioase devine esențială. Prin urmare, scopul aplicației este de a permite unui utilizator să verifice dacă un IP a fost anterior raportat pentru abuzuri. În plus, sunt oferite detalii precum țara de proveniență, furnizorul de servicii (ISP) și coordonatele geografice. Funcționalitatea aplicației include și salvarea căutărilor efectuate, pentru a putea analiza ulterior frecvența și distribuția scorurilor de abuz ale IP-urilor interogate.
 
 ---
 
@@ -48,10 +52,7 @@ Link: https://ipwho.is
 API gratuit, fără autentificare, folosit pentru a obține locația geografică a unui IP (țară, oraș, latitudine, longitudine).
 
 b) API intern propriu (Next.js)
-
 Am creat un endpoint intern /api/searches, care gestionează salvarea și citirea istoricului:
-- **GET /api/searches – întoarce toate IP-urile salvate în MongoDB - Răspuns: 200 OK + JSON**
-- **POST /api/searches – salvează o nouă căutare în baza de date (dacă IP-ul nu a mai fost salvat deja) - Răspuns: 201 Created sau 409 Conflict**
 
 ---
 
