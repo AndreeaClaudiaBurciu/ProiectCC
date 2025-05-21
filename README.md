@@ -54,8 +54,11 @@ Am creat un endpoint intern /api/searches, care gestionează salvarea și citire
 ## 4. Flux de date
 
 a) Utilizatorul introduce o adresă IP.
+
 b) Se face o cerere către AbuseIPDB pentru scorul de abuz.
+
 c) Se face o altă cerere către ipwho.is pentru locație (oraș, țară, coordonate).
+
 d) Datele sunt afișate în aplicație:
 
    - Detalii IP
@@ -63,9 +66,11 @@ d) Datele sunt afișate în aplicație:
    - Grafic cu scorurile din istoric
      
 e) Se salvează căutarea în MongoDB printr-un POST către /api/searches.
+
 f) Se preiau toate căutările salvate și sunt afișate într-un grafic Recharts.
 
 Exemplu request / response și metode HTTPS:
+
 ![image](https://github.com/user-attachments/assets/414f64a9-7503-4186-b300-5c6af29427a7)
 ![image](https://github.com/user-attachments/assets/594ec4d8-ade0-483b-b07b-000f6bc33165)
 
