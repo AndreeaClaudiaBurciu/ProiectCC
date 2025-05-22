@@ -7,8 +7,10 @@
 
 ### Link video prezentare:
 
+https://youtu.be/OaNpeZNwMX8
 
 ### Link aplicație publicată:
+
 https://proiect-cc-sigma.vercel.app/
 
 ---
